@@ -85,7 +85,7 @@ function submitForm() {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ email, band, valid: true })
     }).then(() => {
-        document.body.innerHTML = `<h2>You're logged in 🎉</h2><p>You selected: ${band}</p>`;
+        document.body.innerHTML = `<h2>Verification email sent, please check your inbox. </h2><p>It may be in "spam" folder</p>`;
     }).catch(err => {
         error.textContent = 'Submission failed. Try again.';
         console.error(err);
